@@ -1,0 +1,55 @@
+    $var title: :: upload
+    $var background:$None 
+    $var javascriptfile: http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js /static/main.js
+
+    <h3 class="cover-heading">Enviar tallo de la planta</h3>
+    <form method="post" enctype="multipart/form-data" action=""> 
+      <div class="form-group">
+
+        <label></label>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-default btn-file">
+               Imagen #1 <input type="file" id="imgInp1" name="Tallo1"
+               data-validation="size mime" data-validation-max-size="600kb"
+               data-validation-allowing="jpg"
+               data-validation-error-msg-size="No puedes subir imágenes superiores a 600kb"
+               data-validation-error-msg-mime="Solo puedes subir imágenes .jpg">
+            </span>
+          </span>
+          <input type="text" class="form-control input-solid" readonly>
+        </div>
+        <!--<img id='img-upload'/>-->
+        <label for="imgInp2"></label>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-default btn-file">
+               Imagen #2 <input type="file" id="imgInp2" name="Tallo2" 
+               data-validation="size mime" data-validation-max-size="600kb"
+               data-validation-allowing="jpg"
+               data-validation-error-msg-size="No puedes subir imágenes superiores a 600kb"
+               data-validation-error-msg-mime="Solo puedes subir imágenes .jpg">
+            </span>
+          </span>
+          <input type="text" class="form-control input-solid" readonly>
+        </div>
+        <label for="imgInp3"></label>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-default btn-file">
+               Imagen #3 <input type="file" id="imgInp3" name="Tallo3"
+               data-validation="size mime" data-validation-max-size="600kb"
+               data-validation-allowing="jpg"
+               data-validation-error-msg-size="No puedes subir imágenes superiores a 600kb"
+               data-validation-error-msg-mime="Solo puedes subir imágenes .jpg">
+            </span>
+          </span>
+          <input type="text" class="form-control input-solid" readonly>
+        </div>
+
+        <hr>
+        <button type="submit" class="btn btn-default" id="btn_send" disabled>Procesar</button>
+        <hr>
+      </div>
+    </form>
+
