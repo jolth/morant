@@ -1,0 +1,27 @@
+    $var title: Mora sin Tune :: Cotacto
+    $var background:$None 
+    $var javascriptfile: /static/contact.js
+
+      <form id="form_contact">
+        <div class="form-group">
+          <input type="text" class="form-control" id="inputName"
+          placeholder="Nombre" name="name">
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="inputEmail"
+          placeholder="Correo electrónico" name="email">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="inputMessage" rows="5" 
+          placeholder="Escriba su mensaje..." name="message"></textarea>
+        </div>
+
+        <div class="form-group">
+          <div class="text-right">
+            <button type="submit" class="btn btn-default" id="btn_send"
+                disabled>Enviar</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="message" style="display: none"></div>
