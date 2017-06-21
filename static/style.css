@@ -13,10 +13,13 @@ a:hover {
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
-  color: #333;
+  /*color: #333;*/
+  color: #fff;
   text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
+  /*background-color: #fff;
+  border: 1px solid #fff;*/
+  background-color: #3b2752;
+  border: .05rem solid #fff;
 }
 
 
