@@ -75,16 +75,16 @@ class Severity:
     def GET(self):
         json_data = json.dumps(web.input())
         url = 'http://127.0.0.1:3030/sever/'
-        #output = subprocess.check_output(['curl', '-XPOST', url, '-d', str(json_data)])
-        output = '{ "id": "1",\
-                "porcentaje": "nulo",\
-                "mensaje":[{\
-                "medidas": "preventivas",\
-                "tratamiento": "utilice fungicidas protectantes y practicas\
-                culturales."\
-                }]}'
+        output = subprocess.check_output(['curl', '-XPOST', url, '-d', str(json_data)])
+        #output = '{ "id": "1",\
+        #        "porcentaje": "nulo",\
+        #        "mensaje":[{\
+        #        "medidas": "preventivas",\
+        #        "tratamiento": "utilice fungicidas protectantes y practicas\
+        #        culturales."\
+        #        }]}'
         json_data = json.loads(output)
-        print(json.dumps(json_data, indent=4))
+        #print(json.dumps(json_data, indent=4))
         return render.severity(json_data)
 
 
