@@ -1,0 +1,123 @@
+
+Configuraciones:
+
+Creamos el usuario morant propietario de la App:
+
+useradd --shell /bin/bash --home-dir /var/local/morant morant
+
+Le asignamos un contraseña:
+
+passwd morant
+
+
+Instalar Servicor Web:
+
+$ sudo apt install nginx
+
+img#1
+
+Instalar lo necesario para python
+
+$ sudo apt install python-dev python-pip python-virtualenv build-essential
+
+
+Instalar morant
+
+$ sudo pip install web.py
+
+Download los ficheros morant.tar.gz
+
+$ cd morant
+$ vim uwsgi.ini (ya va a estar creado)[NO incluir]
+
+
+Configure Nginx to Proxy to uWSGI
+
+$ sudo vim /etc/nginx/sites-available/morantapp
+
+
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        location / {
+                include uwsgi_params;
+                uwsgi_pass 127.0.0.1:3031;
+        }
+
+        location /static {
+                alias /var/local/morant/morant/static;
+        }
+}
+
+
+
+Habilitamos nuesta configuración:
+$ sudo rm /etc/nginx/sites-enabled/default
+$ sudo ln -s /etc/nginx/sites-available/morantapp /etc/nginx/sites-enabled
+
+reiniciamos el Nginx:
+$ sudo systemctl restart nginx.service
+
+Testig la aplicación:
+$ uwsgi -s 0.0.0.0:9000 -w app
+$ curl localhost
+
+
+* Configurar modo Emperor:
+
+$ sudo mkdir -p /etc/uwsgi/sites
+
+creamos el fichero de configuración uwsgi.ini:
+
+[uwsgi]
+socket = 127.0.0.1:3031
+uid = morant
+gid = morant
+chdir = /var/local/morant/morant 
+wsgi-file = app.py
+master = true
+processes = 4
+threads = 2
+harakiri = 30
+stats = 127.0.0.1:9191
+--offload-threads = 1
+
+
+$ sudo ln -s /var/local/morant/morant/uwsgi.ini /etc/uwsgi/sites/
+
+
+** Systemd para uWSGI
+
+Ya que estamos seguros de su funcionamiento, vamos a crear una unidad para que arranque automaticamnete:
+
+$ sudo vim /etc/systemd/system/morant.service
+
+[Unit]
+Description=uWSGI Emperor service - Morant App
+After=syslog.target
+
+[Service]
+ExecStartPre=/bin/bash -c 'mkdir -p /run/uwsgi; chown morant:www-data /run/uwsgi'
+ExecStart=/usr/local/bin/uwsgi --emperor /etc/uwsgi/sites
+RuntimeDirectory=uwsgi
+Restart=always
+KillSignal=SIGTERM
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
+
+
+* Correr servidor:
+
+$ sudo systemctl restart nginx.service
+
+abilitar nuestra unidad:
+$ sudo systemctl enable morant.service
+$ sudo systemctl start morant.service
+
+
