@@ -1,0 +1,16 @@
+[Unit]
+Description=uWSGI Emperor service - Morant App
+After=syslog.target
+
+[Service]
+ExecStartPre=/bin/bash -c 'mkdir -p /run/uwsgi; chown morant:www-data /run/uwsgi'
+ExecStart=/usr/local/bin/uwsgi --emperor /etc/uwsgi/sites
+RuntimeDirectory=uwsgi
+Restart=always
+KillSignal=SIGTERM
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
