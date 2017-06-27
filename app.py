@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 # 0 ==> unlimited input
 #cgi.maxlen = 1 * 1024 * 1024 #10MB
 
-#web.config.debug = False
+web.config.debug = False
 render = web.template.render('templates/', base='layout')
 
 
