@@ -93,6 +93,14 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
+.media-left {
+  text-align: left;
+}
+
+.media-right {
+  text-align: right;
+}
+
 .site-background {
   background-image: url(/static/images/background_3796_compress.jpg);
   background-position: center center;
