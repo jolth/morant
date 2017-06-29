@@ -74,8 +74,10 @@ class Upload:
 class Severity:
     def GET(self):
         json_data = json.dumps(web.input())
-        url = 'http://127.0.0.1:3030/sever/'
-        output = subprocess.check_output(['curl', '-XPOST', url, '-d', str(json_data)])
+        #url = 'http://127.0.0.1:3030/sever/'
+        #output = subprocess.check_output(['curl', '-XPOST', url, '-d', str(json_data)])
+        #output = subprocess.check_output(['sever', str(json_data)])
+        output = subprocess.check_output(['process_morant', str(json_data)])
         #output = '{ "id": "1",\
         #        "porcentaje": "nulo",\
         #        "mensaje":[{\
